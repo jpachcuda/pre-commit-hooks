@@ -4,3 +4,9 @@
   entry: hooks/delete-me.sh
   language: script
   always_run: true
+- id: miss-kusto
+  name: Manifest missing from kustomization
+  description: This hook checks for files missing from kustomization.yaml files
+  entry: hooks/miss-kusto.sh
+  language: script
+  always_run: true
