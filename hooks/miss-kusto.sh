@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 set -uo pipefail
 
+missing=0
+
 check_miss () {
     if ! cat "$1/kustomization.yaml" | grep -q $2;
     then
-        echo "$2 is not referenced in $1/kustomization.yaml"
-        missing=true
+        echo "$2 is not referenced in $1/kustomization.yaml";
+        missing=1
     fi
 }
-
-missing=false
 
 for i in $*
 do  
@@ -29,4 +29,4 @@ do
     fi
 done
 
-[[ ! $missing ]] || { exit 1; }
+[[ $missing -eq 0 ]] || { exit 1; }
