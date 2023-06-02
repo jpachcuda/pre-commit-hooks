@@ -1,28 +1,32 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -uo pipefail
 
 check_miss () {
     if ! cat "$1/kustomization.yaml" | grep -q $2;
     then
         echo "$2 is not referenced in $1/kustomization.yaml"
-        exit 1;
+        missing=true
     fi
 }
 
+missing=false
+
 for i in $*
-do
+do  
+    [[ ! "$i" == *"values"* ]] || { continue; }
+    [[ "$i" == *".yaml" ]] || { continue; }
+    [[ ! "$i" == *"/kustomization.yaml" ]] || { continue; }
+
     dir=$(dirname $i)
     dirdir=$(dirname $dir)
-    # It must be a yaml that is not a values or kustomization file
-    if [[ ! "$i" == *"values"* ]] && [[ "$i" == *".yaml" ]] && [[ ! "$i" == *"/kustomization.yaml" ]];
+
+    if [[ -a "$dir/kustomization.yaml" ]];
     then
-        if [[ -a "$dir/kustomization.yaml" ]];
-        then
-            check_miss $dir $(basename $i)
-        # check kustomization a dir above if its a patch
-        elif [[ $dir == *"/patches"* ]];
-        then
-            check_miss $dirdir $(basename $i)
-        fi
+        check_miss $dir $(basename $i)
+    elif [[ $dir == *"/patches"* ]];
+    then
+        check_miss $dirdir $(basename $i)
     fi
 done
+
+[[ ! $missing ]] || { exit 1; }
