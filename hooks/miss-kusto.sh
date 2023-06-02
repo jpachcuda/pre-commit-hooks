@@ -16,7 +16,7 @@ do
     [[ ! "$i" == *"values"* ]] || { continue; }
     [[ "$i" == *".yaml" ]] || { continue; }
     [[ ! "$i" == *"/kustomization.yaml" ]] || { continue; }
-    echo $i
+
     dir=$(dirname $i)
     dirdir=$(dirname $dir)
 

@@ -13,7 +13,7 @@ repos:
   - id: kustomize-build
   - id: kustomize-missing
 - repo: https://github.com/jpachcuda/pre-commit-hooks
-  rev: main
+  rev: v0.1.1
   hooks:
   - id: delete-me
   - id: miss-kusto
