@@ -10,3 +10,9 @@
   entry: hooks/miss-kusto.sh
   language: script
   always_run: true
+- id: software-docks
+  name: Generate software docs from Dockerfile
+  description: This hook generates a DOCS.md file with OS and Software based on Dockerfile
+  entry: hooks/software-docks.sh
+  language: script
+  always_run: false
