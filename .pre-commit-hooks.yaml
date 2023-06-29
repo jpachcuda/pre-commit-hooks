@@ -15,4 +15,4 @@
   description: This hook generates a DOCS.md file with OS and Software based on Dockerfile
   entry: hooks/software-docks.sh
   language: script
-  always_run: false
+  always_run: true
