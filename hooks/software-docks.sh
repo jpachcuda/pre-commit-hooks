@@ -12,7 +12,7 @@ $(grep -w FROM Dockerfile | awk '{print tolower($0)}' | sed -r 's/(.*:)(.*)-(.*)
 
 ## Installed Software
 
-$(grep -w "ARG .*_VERSION=\"[0-9]*\.[0-9]*\.[0-9]*\"" Dockerfile | awk '{print tolower($0)}' | sed -r 's/arg(.*)(_version=\")(.*)\"$/-\1 \3/')
+$(grep -w "ARG .*_VERSION=\"v\?[0-9]*\.[0-9]*\.[0-9]*\"" Dockerfile | awk '{print tolower($0)}' | sed -r 's/arg(.*)(_version=\"v?)(.*)\"$/-\1 \3/')
 EOT
 )
 
