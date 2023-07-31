@@ -14,6 +14,7 @@ check_miss () {
 for i in $*
 do  
     [[ ! "$i" == *"values"* ]] || { continue; }
+    [[ ! "$i" == *"cluster-app.yaml" ]] || { continue; }
     [[ "$i" == *".yaml" ]] || { continue; }
     [[ ! "$i" == *"/kustomization.yaml" ]] || { continue; }
 
